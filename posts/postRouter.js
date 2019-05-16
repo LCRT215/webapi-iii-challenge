@@ -1,25 +1,25 @@
 const express = "express";
 
 const router = express.Router();
+const postDb = require("./postDb.js");
 
-router.get("/", (req, res) => {});
+router.get("/", async (req, res) => {
+  try {
+    const post = await postDb.get();
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Something went wrong"
+    });
+  }
+});
 
 router.get("/:id", (req, res) => {});
 
 router.delete("/:id", (req, res) => {});
 
-router.put("/:id", (req, res) => {
-  const { id } = req.params;
-  const changes = req.body;
-
-  debug.update (id, changes)
-  .then(updated) => {
-      if (updated){
-          res.status(200).json({success:true,
-        hub})
-      }
-  }
-});
+router.put("/:id", (req, res) => {});
 
 // custom middleware
 
